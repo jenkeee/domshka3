@@ -112,15 +112,20 @@ namespace domashka3
         // Все методы и поля публичные. Мы можем получить доступ к ним из другого класса.
         public int up_str;
         public int down_str;
+        public double desyatki;
 
         public Drob Plus(Drob drob2)
         {
             Drob drob3 = new Drob();
             drob3.up_str = this.up_str * drob2.down_str + drob2.up_str * this.down_str;
             drob3.down_str = drob2.down_str * this.down_str;
+            drob3.desyatki = drob3.up_str / drob3.down_str;
+
+
             return drob3;
         }
 
+      
         public Drob minus(Drob drob2)
         {
             Drob drob3 = new Drob();
@@ -239,7 +244,7 @@ namespace domashka3
                             dz2();
                             break;
                         case 3:
-                            dz3();
+                            dz3(first_name, last_name);
                             break;
                             /* default:      // тут она не нужна дефаулт, но оставил для примера // выше проверка убивает смысл дкефаулта
                                  flag_switch = !flag_switch; // думаю как сделать проверку на X при чем тут не равно b  // как я понял                     
@@ -405,7 +410,7 @@ namespace domashka3
             ///3.	*Описать класс дробей — рациональных чисел, являющихся отношением двух целых чисел. Предусмотреть методы сложения, вычитания, умножения и деления дробей.
             /// Написать программу, демонстрирующую все разработанные элементы класса.
             /// </summary>
-            static void dz3()
+            static void dz3(string first_name, string last_name)
             {
                 /*double chislitel;
                 int znamenatel;
@@ -420,10 +425,9 @@ namespace domashka3
                 drob1.down_str = 1;
                 Console.WriteLine($"complex1 = {chislitel.up_str}^ " +
                     $"| {drob1.down_str}down");*/
-                double desyatki;
                 bool flag_drob;
                 Console.Clear();
-                Console.Title = ("задача 1-б");
+                Console.Title = ("задача 3");
                 Drob drob1 = new Drob();
                 drob1.up_str = 1;
                 Console.WriteLine($"Привет, сейчас мы будем складывать, умножать,делить, вычитать ДРОБИ ");
@@ -445,7 +449,8 @@ namespace domashka3
                             drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
                         else
                             input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
-                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения.
+                        Console.WriteLine("");
+                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения. если пробел сообщить
 
                         flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
                         break;
@@ -500,7 +505,8 @@ namespace domashka3
                         
                         else
                             input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
-                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения.
+                        Console.WriteLine("");
+                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения.Вывод сообщения. если пробел сообщить
 
                         flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
                         break;
@@ -508,7 +514,7 @@ namespace domashka3
 
                     flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
                     // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет
-                    drob1.down_str = input_z;
+                    drob2.down_str = input_z;
                     if (input_z != 0)
                     {
                         Console.SetCursorPosition(0, 11);
@@ -534,9 +540,14 @@ namespace domashka3
                 Drob result_plus = drob1.Plus(drob2); // перезапишем resulrs он же result_plus 
 
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
-                Console.WriteLine($"результат сложения знаменател = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
-                
-                Console.WriteLine($"десятичная дробь = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
+                Console.WriteLine($"результат сложения знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str}  || " +
+                    $" НОД числетя и знаменателя {NOD(result_plus.up_str, result_plus.down_str) } =  {result_plus.up_str / NOD(result_plus.up_str, result_plus.down_str)}/{result_plus.down_str / NOD(result_plus.up_str, result_plus.down_str)}  ");
+                Console.WriteLine($"сокращенная дробь = {result_plus.up_str / NOD(result_plus.up_str, result_plus.down_str)}/{result_plus.down_str / NOD(result_plus.up_str, result_plus.down_str)}  ");
+                double plus_up = Convert.ToDouble(result_plus.up_str);
+                double plus_down = Convert.ToDouble(result_plus.down_str);
+                //Console.WriteLine($"результат сложения дробей в виде десятичной дроби = {result_plus.up_str} / {result_plus.down_str}  =  {result_plus.desyatki:f5}"); // так не считает // с инт округляет до ближайшего целого вниз
+                Console.WriteLine($"результат сложения дробей в виде десятичной дроби = {plus_up} / {plus_down}  =  {plus_up / plus_down}");
+                Console.WriteLine("НОД от числителя " + result_plus.up_str + " и знаменателя " + result_plus.down_str + " Получается = " + NOD(result_plus.up_str, result_plus.down_str));
                 Console.WriteLine($"");
 
                 // начинаем операции вычетания дробей
@@ -544,24 +555,73 @@ namespace domashka3
                 Drob result_minus = drob1.minus(drob2); // перезапишем resulrs он же result_minus 
 
                 Console.WriteLine($"результат вычетания числитель  = {drob1.up_str}  -  {drob2.up_str}  =  {result_minus.up_str}");
-                Console.WriteLine($"результат вычетания знаменател = {drob1.down_str}  -  {drob2.down_str}  =  {result_minus.down_str}  ||  {result_minus.up_str}/{result_minus.down_str} ");
+                Console.WriteLine($"результат вычетания знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_minus.down_str}  ||  {result_minus.up_str}/{result_minus.down_str} ");
+                Console.WriteLine($"сокращенная дробь = {result_minus.up_str / NOD(result_minus.up_str, result_minus.down_str)}/{result_minus.down_str / NOD(result_minus.up_str, result_minus.down_str)}  ");
+                double minus_up = Convert.ToDouble(result_minus.up_str);
+                double minus_down = Convert.ToDouble(result_minus.down_str);
+                Console.WriteLine($"результат вычетания дробей в виде десятичной дроби = {minus_up} / {minus_down}  =  {minus_up / minus_down}");
                 Console.WriteLine($"");
-
+                
                 // начинаем операции деления дробей
 
                 Drob result_delen = drob1.del(drob2); // перезапишем resulrs он же result_minus 
 
                 Console.WriteLine($"результат деления числитель  = {drob1.up_str}  /  {drob2.up_str}  =  {result_delen.up_str}");     
-                Console.WriteLine($"результат деления знаменател = {drob1.down_str}  /  {drob2.down_str}  =  {result_delen.down_str}  ||  {result_delen.up_str}/{result_delen.down_str} ");
+                Console.WriteLine($"результат деления знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_delen.down_str}  ||  {result_delen.up_str}/{result_delen.down_str} ");
+                Console.WriteLine($"сокращенная дробь = {result_delen.up_str / NOD(result_delen.up_str, result_delen.down_str)}/{result_delen.down_str / NOD(result_delen.up_str, result_delen.down_str)}  ");
+
+                double delen_up = Convert.ToDouble(result_delen.up_str);
+                double delen_down = Convert.ToDouble(result_delen.down_str);
+                Console.WriteLine($"результат деления дробей в виде десятичной дроби = {delen_up} / {delen_down}  =  {delen_up / delen_down}");
                 Console.WriteLine($"");
+
 
                 // начинаем операции умножения дробей
 
                 Drob result_umnogenie = drob1.umnog(drob2);
                 Console.WriteLine($"результат умножения числитель  = {drob1.up_str}  *  {drob2.up_str}  =  {result_umnogenie.up_str}");
-                Console.WriteLine($"результат умножения знаменател = {drob1.down_str}  *  {drob2.down_str}  =  {result_umnogenie.down_str}  ||  {result_umnogenie.up_str}/{result_umnogenie.down_str} ");
+                Console.WriteLine($"результат умножения знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_umnogenie.down_str}  ||  {result_umnogenie.up_str}/{result_umnogenie.down_str} ");
+                Console.WriteLine($"сокращенная дробь = {result_umnogenie.up_str / NOD(result_umnogenie.up_str, result_umnogenie.down_str)}/{result_umnogenie.down_str / NOD(result_umnogenie.up_str, result_umnogenie.down_str)}  ");
+
+                double umnogenie_up = Convert.ToDouble(result_umnogenie.up_str);
+                double umnogenie_down = Convert.ToDouble(result_umnogenie.down_str);
+                Console.WriteLine($"результат умножения дробей в виде десятичной дроби = {umnogenie_up} / {umnogenie_down}  =  {umnogenie_up / umnogenie_down}");
+                Console.WriteLine($"");
+
+                /*
+                Console.WriteLine("Привет, сегодня мы попробуем вычеслить алгоритм Евклида. НОД - является наибольшим целым числом, которое может разделять два значения без остатка");
+                Console.ReadKey();
+                Console.SetCursorPosition(10, 15);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Clear();
+                Console.Write("Введи первое число:");
+                int a = Convert.ToInt32(Console.ReadLine());
+                Console.SetCursorPosition(10, 15);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Clear();
+                Console.Write("Введи второе число:");
+                int b = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
+                Console.SetCursorPosition(10, 15);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("НОД от первого числа " + a + " и второго числа " + b + " Получается = " + NOD(a, b)); // выводит на экран результат выполнения метода от переменных A и B 
+                Console.ReadKey();
+            */
+           
 
 
+            //CREDITS 
+            #region credits
+            Console.SetCursorPosition(13, 36);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Автор : " + first_name +" "+ last_name);
+                Console.SetCursorPosition(10, 38);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("THE FORCE BE WITH U... SEE YA LATER");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("AND WITH THE FORCE... I WILL REDUCE FRACTURE ");
+                Console.ForegroundColor = ConsoleColor.White;
+                #endregion
                 /* 
 
                  Complex_cl result = complex1.umojil(complex2); // перезапишем resulrs он же complex3 
@@ -573,6 +633,12 @@ namespace domashka3
                  Console.WriteLine(result.ToString());*/
                 Console.ReadKey();
                 // в конец запутался но вроде реализовал формулу
+            }
+            static int NOD(int a, int b) // Описывает вычесления НОД от двух чисел // позже вызовем метод вычисления 1ой строкой
+            {
+                while (a != b) // если а не равно б
+                    if (a > b) a = a - b; else b = b - a;
+                return a;
             }
 
             #endregion
