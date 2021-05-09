@@ -135,6 +135,7 @@ namespace domashka3
              drob2.up_str = Convert.ToInt32(up3);*/
             drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
             drob3.down_str = drob2.down_str * this.down_str;
+            if (drob3.up_str == 0) { drob3.up_str = drob3.up_str + 1; }
             return drob3;
         }
         public Drob del(Drob drob2)
@@ -269,13 +270,18 @@ namespace domashka3
             {
                 Console.Clear();
                 Console.Title = ("меню первой задачи");
+                Console.SetCursorPosition(13, 12);
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"Введи 1 для того чтобы посмотреть вычитание комплексных чисел");
+                Console.SetCursorPosition(13, 13);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Введи 2 для того чтобы посмотреть вычитание и умножение комплексных чисел, представленных в виде класса");
+                Console.ForegroundColor = ConsoleColor.White;
                 bool flag_switch = true;
                 do
                 {
 
-                    Console.Clear();
+                    
 
                     value = GetValue(""); // даем значение велью методом GetValue // и там метод уже либо пропустит int32 либо будет бесконечно вызыватся, пока ты не напишиш цифры удовлетворяющие условия
                                           // гет валью дает нам проверку на вводимы знаки, а диапазон мы сдесь даже не ставили У НАС ВСЕГО 3 КЕЙСА
@@ -440,14 +446,14 @@ namespace domashka3
                 Console.WriteLine($"Введи знаменатель:");
                 while (true) // Вечный цикл
                 {
-                    flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
+                    flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input / если аут сработает сообщит тру во флаг
 
-                    while (!flag_drob)
+                    while (!flag_drob) // переворачиваем условие если тру то будет фалс
                     {
 
-                        if (input_z != 0) // делаем условие проверка на нечет и положительное
-                            drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
-                        else
+                        if (input_z != 0) // делаем условие проверка на не равно нулю
+                            drob1.down_str = input_z; // если условие выполнено, записываем введенное число в класс drob1.down_str
+                        else              // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
                             input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
                         Console.WriteLine("");
                         Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения. если пробел сообщить
@@ -457,7 +463,7 @@ namespace domashka3
                     }
 
                     flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
-                    // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет
+                    // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет 
                     drob1.down_str = input_z;
                     if (input_z != 0)
                     {
@@ -483,6 +489,16 @@ namespace domashka3
              }*/
                 Console.WriteLine($"chislitel  =_{drob1.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob1.down_str}  | ");
+                Console.WriteLine($"");
+                Console.WriteLine($"сразу сократим дробь = {drob1.up_str}/{drob1.down_str} до ");
+                int chislitel = Convert.ToInt32(drob1.up_str);
+                int znamenatel = Convert.ToInt32(drob1.down_str);
+                drob1.up_str = chislitel/ NOD(chislitel, znamenatel);
+                drob1.down_str = znamenatel / NOD(chislitel, znamenatel);
+                Console.WriteLine($"сразу сократим дробь = {drob1.up_str}/{drob1.down_str} ");
+                Console.WriteLine($"");
+
+
 
                 Console.WriteLine($"А сейчас введем вторую дробь ");
 
@@ -535,9 +551,18 @@ namespace domashka3
                 Console.WriteLine($"chislitel  =_{drob2.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob2.down_str}  | ");
 
+                Console.WriteLine($"");
+                Console.WriteLine($"сразу сократим дробь = {drob2.up_str}/{drob2.down_str} до ");
+                int chislitel_2 = Convert.ToInt32(drob2.up_str);
+                int znamenatel_2 = Convert.ToInt32(drob2.down_str);
+                drob2.up_str = chislitel_2 / NOD(chislitel_2, znamenatel_2);
+                drob2.down_str = znamenatel_2 / NOD(chislitel_2, znamenatel_2);
+                Console.WriteLine($"сразу сократим дробь = {drob2.up_str}/{drob2.down_str} ");
+                Console.WriteLine($"");
+
                 // начинаем операции они же методы сложения итд
 
-                Drob result_plus = drob1.Plus(drob2); // перезапишем resulrs он же result_plus 
+                Drob result_plus = drob1.Plus(drob2); // перезапишем result_plus на уровне класса от значений которые мы передали в класс
 
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
                 Console.WriteLine($"результат сложения знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str}  || " +
@@ -551,8 +576,9 @@ namespace domashka3
                 Console.WriteLine($"");
 
                 // начинаем операции вычетания дробей
-
-                Drob result_minus = drob1.minus(drob2); // перезапишем resulrs он же result_minus 
+                ///
+                /* тут начинается проблема когда числитель принимает 0 при вычетании*/
+                Drob result_minus = drob1.minus(drob2); // создадим result_minus на основе  класса Drob
 
                 Console.WriteLine($"результат вычетания числитель  = {drob1.up_str}  -  {drob2.up_str}  =  {result_minus.up_str}");
                 Console.WriteLine($"результат вычетания знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_minus.down_str}  ||  {result_minus.up_str}/{result_minus.down_str} ");
@@ -639,6 +665,11 @@ namespace domashka3
                 ////////////////////////////////////////////////// Проверка НОД по модулю числителя и знаменателя
                 if (a < 0) { // если меньше 0
                     a = Convert.ToInt32( Math.Sqrt((Math.Pow(a,2)))); // преобразуем в положительное
+                }
+                else if (a == b)
+                {
+                    a = Convert.ToInt32(Math.Sqrt((Math.Pow(1, 2))));
+                    b = Convert.ToInt32(Math.Sqrt((Math.Pow(1, 2))));
                 }
                 else if (b < 0)// если меньше 0
                 {// преобразуем в положительное
