@@ -112,15 +112,20 @@ namespace domashka3
         // Все методы и поля публичные. Мы можем получить доступ к ним из другого класса.
         public int up_str;
         public int down_str;
+        public double desyatki;
 
         public Drob Plus(Drob drob2)
         {
             Drob drob3 = new Drob();
             drob3.up_str = this.up_str * drob2.down_str + drob2.up_str * this.down_str;
             drob3.down_str = drob2.down_str * this.down_str;
+            drob3.desyatki = drob3.up_str / drob3.down_str;
+
+
             return drob3;
         }
 
+      
         public Drob minus(Drob drob2)
         {
             Drob drob3 = new Drob();
@@ -423,7 +428,7 @@ namespace domashka3
                 double desyatki;
                 bool flag_drob;
                 Console.Clear();
-                Console.Title = ("задача 1-б");
+                Console.Title = ("задача 3");
                 Drob drob1 = new Drob();
                 drob1.up_str = 1;
                 Console.WriteLine($"Привет, сейчас мы будем складывать, умножать,делить, вычитать ДРОБИ ");
@@ -537,8 +542,11 @@ namespace domashka3
 
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
                 Console.WriteLine($"результат сложения знаменател = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
-                
-                //Console.WriteLine($"десятичная дробь = {result_plus.up_str} / {result_plus.down_str}  =  {result_plus.up_str/ result_plus.down_str}");
+
+                double plus_up = Convert.ToDouble(result_plus.up_str);
+                double plus_down = Convert.ToDouble(result_plus.down_str);
+                //Console.WriteLine($"результат сложения дробей в виде десятичной дроби = {result_plus.up_str} / {result_plus.down_str}  =  {result_plus.desyatki:f5}"); // так не считает // с инт округляет до ближайшего целого вниз
+                Console.WriteLine($"результат сложения дробей в виде десятичной дроби = {plus_up} / {plus_down}  =  {plus_up / plus_down}");
                 Console.WriteLine($"");
 
                 // начинаем операции вычетания дробей
@@ -547,22 +555,32 @@ namespace domashka3
 
                 Console.WriteLine($"результат вычетания числитель  = {drob1.up_str}  -  {drob2.up_str}  =  {result_minus.up_str}");
                 Console.WriteLine($"результат вычетания знаменател = {drob1.down_str}  -  {drob2.down_str}  =  {result_minus.down_str}  ||  {result_minus.up_str}/{result_minus.down_str} ");
+                double minus_up = Convert.ToDouble(result_minus.up_str);
+                double minus_down = Convert.ToDouble(result_minus.down_str);
+                Console.WriteLine($"результат вычетания дробей в виде десятичной дроби = {minus_up} / {minus_down}  =  {minus_up / minus_down}");
                 Console.WriteLine($"");
-
+                
                 // начинаем операции деления дробей
 
                 Drob result_delen = drob1.del(drob2); // перезапишем resulrs он же result_minus 
 
                 Console.WriteLine($"результат деления числитель  = {drob1.up_str}  /  {drob2.up_str}  =  {result_delen.up_str}");     
                 Console.WriteLine($"результат деления знаменател = {drob1.down_str}  /  {drob2.down_str}  =  {result_delen.down_str}  ||  {result_delen.up_str}/{result_delen.down_str} ");
+                double delen_up = Convert.ToDouble(result_delen.up_str);
+                double delen_down = Convert.ToDouble(result_delen.down_str);
+                Console.WriteLine($"результат деления дробей в виде десятичной дроби = {delen_up} / {delen_down}  =  {delen_up / delen_down}");
                 Console.WriteLine($"");
+
 
                 // начинаем операции умножения дробей
 
                 Drob result_umnogenie = drob1.umnog(drob2);
                 Console.WriteLine($"результат умножения числитель  = {drob1.up_str}  *  {drob2.up_str}  =  {result_umnogenie.up_str}");
                 Console.WriteLine($"результат умножения знаменател = {drob1.down_str}  *  {drob2.down_str}  =  {result_umnogenie.down_str}  ||  {result_umnogenie.up_str}/{result_umnogenie.down_str} ");
-
+                double umnogenie_up = Convert.ToDouble(result_umnogenie.up_str);
+                double umnogenie_down = Convert.ToDouble(result_umnogenie.down_str);
+                Console.WriteLine($"результат умножения дробей в виде десятичной дроби = {umnogenie_up} / {umnogenie_down}  =  {umnogenie_up / umnogenie_down}");
+                Console.WriteLine($"");
 
                 /* 
 
