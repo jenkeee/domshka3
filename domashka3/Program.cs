@@ -125,14 +125,14 @@ namespace domashka3
             return drob3;
         }
 
-      
+
         public Drob minus(Drob drob2)
         {
             Drob drob3 = new Drob();
-           /* int up1 = this.up_str * drob2.down_str;
-            int up2 = drob2.up_str * this.down_str;
-            double up3 = up1 - up2;
-            drob2.up_str = Convert.ToInt32(up3);*/
+            /* int up1 = this.up_str * drob2.down_str;
+             int up2 = drob2.up_str * this.down_str;
+             double up3 = up1 - up2;
+             drob2.up_str = Convert.ToInt32(up3);*/
             drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
             drob3.down_str = drob2.down_str * this.down_str;
             return drob3;
@@ -432,7 +432,7 @@ namespace domashka3
                 drob1.up_str = 1;
                 Console.WriteLine($"Привет, сейчас мы будем складывать, умножать,делить, вычитать ДРОБИ ");
                 Console.WriteLine($"Введи числитель:");
-                flag_drob = int.TryParse(Console.ReadLine(), out  drob1.up_str);
+                flag_drob = int.TryParse(Console.ReadLine(), out drob1.up_str);
                 drob1.down_str = 1;
                 int input_z = 0;
 
@@ -444,7 +444,7 @@ namespace domashka3
 
                     while (!flag_drob)
                     {
-                        
+
                         if (input_z != 0) // делаем условие проверка на нечет и положительное
                             drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
                         else
@@ -468,20 +468,20 @@ namespace domashka3
                         break;
                     } // Выход из вечного цикла:
                     else if (input_z == 0)
-                        Console.SetCursorPosition(0,3);
+                        Console.SetCursorPosition(0, 3);
                     Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("ArgumentException(Знаменатель не может быть равен 0) || введите корректное значение: "); // Вывод сообщения. // Выход из вечного цикла:
+                    Console.WriteLine("ArgumentException(Знаменатель не может быть равен 0) || введите корректное значение: "); // Вывод сообщения. // Выход из вечного цикла:
                     Console.ForegroundColor = ConsoleColor.White;
                 }
 
-               /* Console.WriteLine($"Введи знаменатель:");
-                flag_drob = int.TryParse(Console.ReadLine(), out drob1.down_str);
-               /* if (input > 0 && input % 2 == 1) // делаем условие проверка на нечет и положительное
-                    into = input; // если условие выполнено, записываем введенное число, дальше мы его сложим
-                else
-                    into = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
-            }*/
-            Console.WriteLine($"chislitel  =_{drob1.up_str}_ | ");
+                /* Console.WriteLine($"Введи знаменатель:");
+                 flag_drob = int.TryParse(Console.ReadLine(), out drob1.down_str);
+                /* if (input > 0 && input % 2 == 1) // делаем условие проверка на нечет и положительное
+                     into = input; // если условие выполнено, записываем введенное число, дальше мы его сложим
+                 else
+                     into = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
+             }*/
+                Console.WriteLine($"chislitel  =_{drob1.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob1.down_str}  | ");
 
                 Console.WriteLine($"А сейчас введем вторую дробь ");
@@ -502,7 +502,7 @@ namespace domashka3
 
                         if (input_z != 0) // делаем условие проверка на нечет и положительное
                             drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
-                        
+
                         else
                             input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
                         Console.WriteLine("");
@@ -518,7 +518,7 @@ namespace domashka3
                     if (input_z != 0)
                     {
                         Console.SetCursorPosition(0, 11);
-                        Console.ForegroundColor = ConsoleColor.Blue;                        
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("ArgumentException(вы устранили конфликт - знаменатель не может быть равен 0) || на 0 делить нельзя"); // Вывод сообщения
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
@@ -531,7 +531,7 @@ namespace domashka3
                 }
                 // конец проверки
 
-               // flag_drob = int.TryParse(Console.ReadLine(), out drob2.down_str);
+                // flag_drob = int.TryParse(Console.ReadLine(), out drob2.down_str);
                 Console.WriteLine($"chislitel  =_{drob2.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob2.down_str}  | ");
 
@@ -541,7 +541,7 @@ namespace domashka3
 
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
                 Console.WriteLine($"результат сложения знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str}  || " +
-                    $" НОД числетя и знаменателя {NOD(result_plus.up_str, result_plus.down_str) } =  {result_plus.up_str / NOD(result_plus.up_str, result_plus.down_str)}/{result_plus.down_str / NOD(result_plus.up_str, result_plus.down_str)}  ");
+                    $" НОД числителя и знаменателя {NOD(result_plus.up_str, result_plus.down_str) } =  {result_plus.up_str / NOD(result_plus.up_str, result_plus.down_str)}/{result_plus.down_str / NOD(result_plus.up_str, result_plus.down_str)}  ");
                 Console.WriteLine($"сокращенная дробь = {result_plus.up_str / NOD(result_plus.up_str, result_plus.down_str)}/{result_plus.down_str / NOD(result_plus.up_str, result_plus.down_str)}  ");
                 double plus_up = Convert.ToDouble(result_plus.up_str);
                 double plus_down = Convert.ToDouble(result_plus.down_str);
@@ -561,12 +561,12 @@ namespace domashka3
                 double minus_down = Convert.ToDouble(result_minus.down_str);
                 Console.WriteLine($"результат вычетания дробей в виде десятичной дроби = {minus_up} / {minus_down}  =  {minus_up / minus_down}");
                 Console.WriteLine($"");
-                
+
                 // начинаем операции деления дробей
 
                 Drob result_delen = drob1.del(drob2); // перезапишем resulrs он же result_minus 
 
-                Console.WriteLine($"результат деления числитель  = {drob1.up_str}  /  {drob2.up_str}  =  {result_delen.up_str}");     
+                Console.WriteLine($"результат деления числитель  = {drob1.up_str}  /  {drob2.up_str}  =  {result_delen.up_str}");
                 Console.WriteLine($"результат деления знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_delen.down_str}  ||  {result_delen.up_str}/{result_delen.down_str} ");
                 Console.WriteLine($"сокращенная дробь = {result_delen.up_str / NOD(result_delen.up_str, result_delen.down_str)}/{result_delen.down_str / NOD(result_delen.up_str, result_delen.down_str)}  ");
 
@@ -607,14 +607,14 @@ namespace domashka3
                 Console.WriteLine("НОД от первого числа " + a + " и второго числа " + b + " Получается = " + NOD(a, b)); // выводит на экран результат выполнения метода от переменных A и B 
                 Console.ReadKey();
             */
-           
 
 
-            //CREDITS 
-            #region credits
-            Console.SetCursorPosition(13, 36);
+
+                //CREDITS 
+                #region credits
+                Console.SetCursorPosition(13, 36);
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("Автор : " + first_name +" "+ last_name);
+                Console.WriteLine("Автор : " + first_name + " " + last_name);
                 Console.SetCursorPosition(10, 38);
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("THE FORCE BE WITH U... SEE YA LATER");
@@ -636,6 +636,15 @@ namespace domashka3
             }
             static int NOD(int a, int b) // Описывает вычесления НОД от двух чисел // позже вызовем метод вычисления 1ой строкой
             {
+                ////////////////////////////////////////////////// Проверка НОД по модулю числителя и знаменателя
+                if (a < 0) { // если меньше 0
+                    a = Convert.ToInt32( Math.Sqrt((Math.Pow(a,2)))); // преобразуем в положительное
+                }
+                else if (b < 0)// если меньше 0
+                {// преобразуем в положительное
+                    b = Convert.ToInt32(Math.Sqrt((Math.Pow(b, 2))));
+                }
+                ///////////////////////////////////////////////////////////// конец проверки
                 while (a != b) // если а не равно б
                     if (a > b) a = a - b; else b = b - a;
                 return a;
