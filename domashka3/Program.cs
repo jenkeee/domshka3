@@ -510,7 +510,7 @@ namespace domashka3
 
                     flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
                     // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет
-                    drob1.down_str = input_z;
+                    drob2.down_str = input_z;
                     if (input_z != 0)
                     {
                         Console.SetCursorPosition(0, 11);
@@ -538,7 +538,7 @@ namespace domashka3
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
                 Console.WriteLine($"результат сложения знаменател = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
                 
-                Console.WriteLine($"десятичная дробь = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
+                //Console.WriteLine($"десятичная дробь = {result_plus.up_str} / {result_plus.down_str}  =  {result_plus.up_str/ result_plus.down_str}");
                 Console.WriteLine($"");
 
                 // начинаем операции вычетания дробей
