@@ -491,9 +491,6 @@ namespace domashka3
 
 
 
-
-
-
         }
     }
 }
