@@ -244,7 +244,7 @@ namespace domashka3
                             dz2();
                             break;
                         case 3:
-                            dz3();
+                            dz3(first_name, last_name);
                             break;
                             /* default:      // тут она не нужна дефаулт, но оставил для примера // выше проверка убивает смысл дкефаулта
                                  flag_switch = !flag_switch; // думаю как сделать проверку на X при чем тут не равно b  // как я понял                     
@@ -410,7 +410,7 @@ namespace domashka3
             ///3.	*Описать класс дробей — рациональных чисел, являющихся отношением двух целых чисел. Предусмотреть методы сложения, вычитания, умножения и деления дробей.
             /// Написать программу, демонстрирующую все разработанные элементы класса.
             /// </summary>
-            static void dz3()
+            static void dz3(string first_name, string last_name)
             {
                 /*double chislitel;
                 int znamenatel;
@@ -425,7 +425,6 @@ namespace domashka3
                 drob1.down_str = 1;
                 Console.WriteLine($"complex1 = {chislitel.up_str}^ " +
                     $"| {drob1.down_str}down");*/
-                double desyatki;
                 bool flag_drob;
                 Console.Clear();
                 Console.Title = ("задача 3");
@@ -582,6 +581,21 @@ namespace domashka3
                 Console.WriteLine($"результат умножения дробей в виде десятичной дроби = {umnogenie_up} / {umnogenie_down}  =  {umnogenie_up / umnogenie_down}");
                 Console.WriteLine($"");
 
+
+
+
+                //CREDITS 
+                #region credits
+                Console.SetCursorPosition(13, 30);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Автор : " + first_name + last_name);
+                Console.SetCursorPosition(10, 31);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("THE FORCE BE WITH U... SEE YA LATER");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("AND WITH THE FORCE... I WILL REDUCE FRACTURE ");
+                Console.ForegroundColor = ConsoleColor.White;
+                #endregion
                 /* 
 
                  Complex_cl result = complex1.umojil(complex2); // перезапишем resulrs он же complex3 
