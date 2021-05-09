@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -98,7 +98,7 @@ namespace domashka3
         }
     }
     #endregion
-    #region задание 2 создаю класс
+    #region задание 3 создаю класс
     /// <summary>
     /// 3.	*Описать класс дробей — рациональных чисел, являющихся отношением двух целых чисел. Предусмотреть методы сложения, вычитания, умножения и деления дробей.
     /// Написать программу, демонстрирующую все разработанные элементы класса.
@@ -420,7 +420,7 @@ namespace domashka3
                 drob1.down_str = 1;
                 Console.WriteLine($"complex1 = {chislitel.up_str}^ " +
                     $"| {drob1.down_str}down");*/
-
+                double desyatki;
                 bool flag_drob;
                 Console.Clear();
                 Console.Title = ("задача 1-б");
@@ -430,9 +430,54 @@ namespace domashka3
                 Console.WriteLine($"Введи числитель:");
                 flag_drob = int.TryParse(Console.ReadLine(), out  drob1.up_str);
                 drob1.down_str = 1;
+                int input_z = 0;
+
+                // нужна проверка на ввод знаменатель !=0
                 Console.WriteLine($"Введи знаменатель:");
+                while (true) // Вечный цикл
+                {
+                    flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
+
+                    while (!flag_drob)
+                    {
+                        
+                        if (input_z != 0) // делаем условие проверка на нечет и положительное
+                            drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
+                        else
+                            input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
+                        Console.WriteLine("");
+                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения. если пробел сообщить
+
+                        flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
+                        break;
+                    }
+
+                    flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
+                    // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет
+                    drob1.down_str = input_z;
+                    if (input_z != 0)
+                    {
+                        Console.SetCursorPosition(0, 3);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("ArgumentException(вы устранили конфликт - знаменатель не может быть равен 0) || на 0 делить нельзя"); // Вывод сообщения
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                    } // Выход из вечного цикла:
+                    else if (input_z == 0)
+                        Console.SetCursorPosition(0,3);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("ArgumentException(Знаменатель не может быть равен 0) || введите корректное значение: "); // Вывод сообщения. // Выход из вечного цикла:
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+               /* Console.WriteLine($"Введи знаменатель:");
                 flag_drob = int.TryParse(Console.ReadLine(), out drob1.down_str);
-                Console.WriteLine($"chislitel  =_{drob1.up_str}_ | ");
+               /* if (input > 0 && input % 2 == 1) // делаем условие проверка на нечет и положительное
+                    into = input; // если условие выполнено, записываем введенное число, дальше мы его сложим
+                else
+                    into = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
+            }*/
+            Console.WriteLine($"chislitel  =_{drob1.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob1.down_str}  | ");
 
                 Console.WriteLine($"А сейчас введем вторую дробь ");
@@ -442,7 +487,47 @@ namespace domashka3
                 Console.WriteLine($"Введи числитель:");
                 flag_drob = int.TryParse(Console.ReadLine(), out drob2.up_str);
                 Console.WriteLine($"Введи знаменатель:");
-                flag_drob = int.TryParse(Console.ReadLine(), out drob2.down_str);
+
+                //проверка на не 0
+                while (true) // Вечный цикл
+                {
+                    flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
+
+                    while (!flag_drob)
+                    {
+
+                        if (input_z != 0) // делаем условие проверка на нечет и положительное
+                            drob1.down_str = input_z; // если условие выполнено, записываем введенное число, дальше мы его сложим
+                        
+                        else
+                            input_z = 0; // условие не выполнено, даем введенному значению 0 и не пытаемся trytoparse
+                        Console.WriteLine("");
+                        Console.WriteLine("Повторите ввод числа: "); // Вывод сообщения.Вывод сообщения. если пробел сообщить
+
+                        flag_drob = int.TryParse(Console.ReadLine(), out input_z); // Защита от дурака // try parse то что я искал // out input записывает в input
+                        break;
+                    }
+
+                    flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
+                    // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет
+                    drob1.down_str = input_z;
+                    if (input_z != 0)
+                    {
+                        Console.SetCursorPosition(0, 11);
+                        Console.ForegroundColor = ConsoleColor.Blue;                        
+                        Console.WriteLine("ArgumentException(вы устранили конфликт - знаменатель не может быть равен 0) || на 0 делить нельзя"); // Вывод сообщения
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                    }// Выход из вечного цикла:
+                    else if (input_z == 0)
+                        Console.SetCursorPosition(0, 11);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("ArgumentException(Знаменатель не может быть равен 0) || введите корректное значение: "); // Вывод сообщения. // Выход из вечного цикла:
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                // конец проверки
+
+               // flag_drob = int.TryParse(Console.ReadLine(), out drob2.down_str);
                 Console.WriteLine($"chislitel  =_{drob2.up_str}_ | ");
                 Console.WriteLine($"znamenatel = {drob2.down_str}  | ");
 
@@ -452,6 +537,9 @@ namespace domashka3
 
                 Console.WriteLine($"результат сложения числитель  = {drob1.up_str}  +  {drob2.up_str}  =  {result_plus.up_str}");
                 Console.WriteLine($"результат сложения знаменател = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
+                
+                Console.WriteLine($"десятичная дробь = {drob1.down_str}  +  {drob2.down_str}  =  {result_plus.down_str}  ||  {result_plus.up_str}/{result_plus.down_str} ");
+                Console.WriteLine($"");
 
                 // начинаем операции вычетания дробей
 
@@ -459,6 +547,7 @@ namespace domashka3
 
                 Console.WriteLine($"результат вычетания числитель  = {drob1.up_str}  -  {drob2.up_str}  =  {result_minus.up_str}");
                 Console.WriteLine($"результат вычетания знаменател = {drob1.down_str}  -  {drob2.down_str}  =  {result_minus.down_str}  ||  {result_minus.up_str}/{result_minus.down_str} ");
+                Console.WriteLine($"");
 
                 // начинаем операции деления дробей
 
@@ -466,9 +555,10 @@ namespace domashka3
 
                 Console.WriteLine($"результат деления числитель  = {drob1.up_str}  /  {drob2.up_str}  =  {result_delen.up_str}");     
                 Console.WriteLine($"результат деления знаменател = {drob1.down_str}  /  {drob2.down_str}  =  {result_delen.down_str}  ||  {result_delen.up_str}/{result_delen.down_str} ");
+                Console.WriteLine($"");
 
                 // начинаем операции умножения дробей
-                
+
                 Drob result_umnogenie = drob1.umnog(drob2);
                 Console.WriteLine($"результат умножения числитель  = {drob1.up_str}  *  {drob2.up_str}  =  {result_umnogenie.up_str}");
                 Console.WriteLine($"результат умножения знаменател = {drob1.down_str}  *  {drob2.down_str}  =  {result_umnogenie.down_str}  ||  {result_umnogenie.up_str}/{result_umnogenie.down_str} ");
@@ -488,9 +578,6 @@ namespace domashka3
             }
 
             #endregion
-
-
-
 
 
 
