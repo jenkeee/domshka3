@@ -150,17 +150,35 @@ namespace domashka3
              int up2 = drob2.up_str * this.down_str;
              double up3 = up1 - up2;
              drob2.up_str = Convert.ToInt32(up3);*/
-            if (this.up_str == 0) { this.down_str = 0; drob3.up_str = (this.up_str * drob2.down_str) - (drob2.up_str * this.down_str); }
 
-            else drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
+            // проверим числители 
+            if (this.up_str == 0) { this.down_str = 0; drob3.up_str = this.up_str + drob2.down_str;
+                drob3.down_str = drob2.down_str;
+            }
 
-            if (drob2.up_str == 0) { drob2.down_str = 0; drob3.up_str = (this.up_str * drob2.down_str) - (drob2.up_str * this.down_str); }
+          //  else if (drob2.up_str == 0) 
+          //  {
+          //      drob2.down_str = 0;                 
+          //  drob3.up_str = this.up_str + drob2.down_str;
+          //      drob3.down_str = this.down_str;
+          //  }
 
-            else
 
-            if (drob3.down_str != 0) drob3.down_str = drob2.down_str * this.down_str;
-           else drob3.down_str = this.down_str + drob2.down_str;
-            if (drob3.up_str == 0) { drob3.up_str = drob3.up_str + 1; }
+          //  // все другие случаи
+            else 
+            drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
+            drob3.down_str = drob2.down_str * this.down_str;
+            //drob3.desyatki = drob3.up_str / drob3.down_str;
+
+
+            //  // проверим знаменатели
+
+            //  if (drob3.down_str != 0) drob3.down_str = drob2.down_str * this.down_str;
+            //// непомню зачем но вроде если в результате операций мы получим числитель 0 то вернем ему 1.
+            //  else if (drob3.up_str == 0) { drob3.up_str = drob3.up_str + 1; }
+            if (drob3.up_str == 0) { drob3.down_str = 0; drob3.up_str = 0; }
+            else if (drob3.down_str == 0) { drob3.down_str = drob3.up_str + 1; drob3.desyatki = drob3.up_str / drob3.down_str; }
+            
             return drob3;
         }
         public Drob del(Drob drob2)
@@ -627,7 +645,7 @@ namespace domashka3
                 Console.WriteLine($"сокращенная дробь = {result_minus.up_str / NOD(result_minus.up_str, result_minus.down_str)}/{result_minus.down_str / NOD(result_minus.up_str, result_minus.down_str)}  ");
                 double minus_up = Convert.ToDouble(result_minus.up_str);
                 double minus_down = Convert.ToDouble(result_minus.down_str);
-                Console.WriteLine($"результат вычетания дробей в виде десятичной дроби = {minus_up} / {minus_down}  =  {minus_up / minus_down}");
+                Console.WriteLine($"результат вычетания дробей в виде десятичной дроби = {minus_up} / {minus_down}  =  {result_minus.desyatki} {minus_up / minus_down}");
                 Console.WriteLine($"");
 
                 // начинаем операции деления дробей
