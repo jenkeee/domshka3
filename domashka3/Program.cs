@@ -120,6 +120,7 @@ namespace domashka3
             drob3.up_str = this.up_str * drob2.down_str + drob2.up_str * this.down_str;
             drob3.down_str = drob2.down_str * this.down_str;
             drob3.desyatki = drob3.up_str / drob3.down_str;
+            if (drob3.up_str == 0) { drob3.up_str = 0; drob3.down_str = 0; }
 
 
             return drob3;
@@ -128,13 +129,37 @@ namespace domashka3
 
         public Drob minus(Drob drob2)
         {
+            //Drob drob3 = new Drob();
+            ///* int up1 = this.up_str * drob2.down_str;
+            // int up2 = drob2.up_str * this.down_str;
+            // double up3 = up1 - up2;
+            // drob2.up_str = Convert.ToInt32(up3);*/
+            //if  (this.up_str == 0) { drob3.up_str = 0; drob3.down_str = 0; return this; } 
+            //else if (drob2.up_str == 0) { drob3.up_str = 0; drob3.down_str = 0; return drob2; } 
+
+            //else {
+            //    drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
+            //    drob3.down_str = drob2.down_str * this.down_str;
+            //    if (drob3.up_str == 0) { drob3.up_str = drob3.up_str + 1; return drob3; } 
+            //    // решил проблему вычитания, если результат в числители получит 0, он поставит туда 1
+            //    return drob3;
+            //}
+
             Drob drob3 = new Drob();
             /* int up1 = this.up_str * drob2.down_str;
              int up2 = drob2.up_str * this.down_str;
              double up3 = up1 - up2;
              drob2.up_str = Convert.ToInt32(up3);*/
-            drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
-            drob3.down_str = drob2.down_str * this.down_str;
+            if (this.up_str == 0) { this.down_str = 0; drob3.up_str = (this.up_str * drob2.down_str) - (drob2.up_str * this.down_str); }
+
+            else drob3.up_str = ((this.up_str * drob2.down_str) - (drob2.up_str * this.down_str));
+
+            if (drob2.up_str == 0) { drob2.down_str = 0; drob3.up_str = (this.up_str * drob2.down_str) - (drob2.up_str * this.down_str); }
+
+            else
+
+            if (drob3.down_str != 0) drob3.down_str = drob2.down_str * this.down_str;
+           else drob3.down_str = this.down_str + drob2.down_str;
             if (drob3.up_str == 0) { drob3.up_str = drob3.up_str + 1; }
             return drob3;
         }
@@ -464,7 +489,8 @@ namespace domashka3
 
                     flag_drob = !false; // Избавляемся от бага. // запомни это  // баг когда вводим double
                     // score = score + into; // Прибавляем к сумме чисел новое число прошедшее условие проверки на + и нечет 
-                    drob1.down_str = input_z;
+                                        
+                    drob1.down_str = input_z; 
                     if (input_z != 0)
                     {
                         Console.SetCursorPosition(0, 3);
@@ -479,7 +505,7 @@ namespace domashka3
                     Console.WriteLine("ArgumentException(Знаменатель не может быть равен 0) || введите корректное значение: "); // Вывод сообщения. // Выход из вечного цикла:
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-
+                
                 /* Console.WriteLine($"Введи знаменатель:");
                  flag_drob = int.TryParse(Console.ReadLine(), out drob1.down_str);
                 /* if (input > 0 && input % 2 == 1) // делаем условие проверка на нечет и положительное
@@ -491,11 +517,19 @@ namespace domashka3
                 Console.WriteLine($"znamenatel = {drob1.down_str}  | ");
                 Console.WriteLine($"");
                 Console.WriteLine($"сразу сократим дробь = {drob1.up_str}/{drob1.down_str} до ");
-                int chislitel = Convert.ToInt32(drob1.up_str);
-                int znamenatel = Convert.ToInt32(drob1.down_str);
-                drob1.up_str = chislitel/ NOD(chislitel, znamenatel);
-                drob1.down_str = znamenatel / NOD(chislitel, znamenatel);
-                Console.WriteLine($"сразу сократим дробь = {drob1.up_str}/{drob1.down_str} ");
+                if (drob1.up_str > 0)
+                {
+                    Console.WriteLine($"сокращенная дробь = {drob1.up_str}/{drob1.down_str} ");
+                    int chislitel = Convert.ToInt32(drob1.up_str);
+                    int znamenatel = Convert.ToInt32(drob1.down_str);
+                    drob1.up_str = chislitel / NOD(chislitel, znamenatel);
+                    drob1.down_str = znamenatel / NOD(chislitel, znamenatel);
+
+                }
+                else if (drob1.up_str == 0)
+                {
+                    Console.WriteLine($"первое число 0, как изащренно ты ввел 0, надо же было додуматься {drob1.up_str} из {drob1.down_str} = 0");
+                }
                 Console.WriteLine($"");
 
 
@@ -506,6 +540,7 @@ namespace domashka3
                 Console.WriteLine($"Привет, сейчас мы будем складывать, умножать,делить, вычитать ДРОБИ ");
                 Console.WriteLine($"Введи числитель:");
                 flag_drob = int.TryParse(Console.ReadLine(), out drob2.up_str);
+                
                 Console.WriteLine($"Введи знаменатель:");
 
                 //проверка на не 0
@@ -553,11 +588,18 @@ namespace domashka3
 
                 Console.WriteLine($"");
                 Console.WriteLine($"сразу сократим дробь = {drob2.up_str}/{drob2.down_str} до ");
-                int chislitel_2 = Convert.ToInt32(drob2.up_str);
-                int znamenatel_2 = Convert.ToInt32(drob2.down_str);
-                drob2.up_str = chislitel_2 / NOD(chislitel_2, znamenatel_2);
-                drob2.down_str = znamenatel_2 / NOD(chislitel_2, znamenatel_2);
-                Console.WriteLine($"сразу сократим дробь = {drob2.up_str}/{drob2.down_str} ");
+                if (drob2.up_str > 0)
+                {
+                    int chislitel_2 = Convert.ToInt32(drob2.up_str);
+                    int znamenatel_2 = Convert.ToInt32(drob2.down_str);
+                    drob2.up_str = chislitel_2 / NOD(chislitel_2, znamenatel_2);
+                    drob2.down_str = znamenatel_2 / NOD(chislitel_2, znamenatel_2);
+                    Console.WriteLine($"сокращенная дробь = {drob2.up_str}/{drob2.down_str} ");
+                }
+                else if (drob2.up_str == 0)
+                {
+                    Console.WriteLine($"второе число 0, как изащренно ты ввел 0, надо же было додуматься {drob2.up_str} из {drob2.down_str} = 0");
+                }
                 Console.WriteLine($"");
 
                 // начинаем операции они же методы сложения итд
@@ -608,7 +650,11 @@ namespace domashka3
                 Console.WriteLine($"результат умножения числитель  = {drob1.up_str}  *  {drob2.up_str}  =  {result_umnogenie.up_str}");
                 Console.WriteLine($"результат умножения знаменател = {drob1.down_str}     {drob2.down_str}  =  {result_umnogenie.down_str}  ||  {result_umnogenie.up_str}/{result_umnogenie.down_str} ");
                 Console.WriteLine($"сокращенная дробь = {result_umnogenie.up_str / NOD(result_umnogenie.up_str, result_umnogenie.down_str)}/{result_umnogenie.down_str / NOD(result_umnogenie.up_str, result_umnogenie.down_str)}  ");
-
+                //if (result_umnogenie.up_str > 0 && result_umnogenie.down_str > 0) { 
+                //    result_umnogenie.down_str = Convert.ToInt32(Math.Sqrt((Math.Pow(result_umnogenie.down_str, 2))));
+                //    result_umnogenie.up_str = Convert.ToInt32(Math.Sqrt((Math.Pow(result_umnogenie.up_str, 2))));
+                 
+                //        }
                 double umnogenie_up = Convert.ToDouble(result_umnogenie.up_str);
                 double umnogenie_down = Convert.ToDouble(result_umnogenie.down_str);
                 Console.WriteLine($"результат умножения дробей в виде десятичной дроби = {umnogenie_up} / {umnogenie_down}  =  {umnogenie_up / umnogenie_down}");
@@ -663,8 +709,15 @@ namespace domashka3
             static int NOD(int a, int b) // Описывает вычесления НОД от двух чисел // позже вызовем метод вычисления 1ой строкой
             {
                 ////////////////////////////////////////////////// Проверка НОД по модулю числителя и знаменателя
-                if (a < 0) { // если меньше 0
-                    a = Convert.ToInt32( Math.Sqrt((Math.Pow(a,2)))); // преобразуем в положительное
+                if (a < 0 && b < 0)
+                {
+                    a = Convert.ToInt32(Math.Sqrt((Math.Pow(a, 2))));
+                    b = Convert.ToInt32(Math.Sqrt((Math.Pow(b, 2))));
+
+                }
+                else if(a < 0)
+                { // если меньше 0
+                    a = Convert.ToInt32(Math.Sqrt((Math.Pow(a, 2)))); // преобразуем в положительное
                 }
                 else if (a == b)
                 {
